@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/ea704375c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link href="../dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <title>Corner Store</title>
+</head>
+
+<body>
+  <header class="flex items-center place-content-between max-w-screen px-5 tablet:px-20 desktop:px-40 py-5">
+    <div class="flex gap-4 tablet:gap-6 desktop:gap-8">
+      <p class="text-lg tablet:text-xl desktop:text-xl font-medium text-gray-900"> Home </p>
+      <p class="text-lg tablet:text-xl desktop:text-xl font-medium text-gray-900"> About </p>
+    </div>
+    <div>
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/bag.png" alt="">
+    </div>
+    <div class="flex gap-4 tablet:gap-6 desktop:gap-8">
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/user.png" alt="">
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/shopping-cart.png" alt="">
+    </div>
+  </header>
+
+
+  <div class="carousel flex justify-center items-center overflow-hidden max-w-screen max-h-screen">
+    <div
+      class=" flex items-center gap-5 tablet:gap-10 desktop:gap-20 absolute z-10 left-0 ml-4 tablet:ml-8 desktop:ml-16">
+      <img
+        class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10 bg-white rounded-full p-1 tablet:p-3 desktop:p-3"
+        id="previousImg" src="images/icons/left-arrow.png" alt="">
+      <div class="flex-col flex-wrap">
+        <p class="bg-white rounded-full text-sm tablet:text-xl desktop:text-4xl font-semibold tracking-normal tablet:tracking-wide desktop:tracking-widest 
+          px-1 tablet:px-3 desktop:px-5 py-1 tablet:py-3 desktop:py-3">
+          Bed pillows and table sets </p>
+        <a href="#"
+          class="text-xs tablet:text-lg desktop:text-2xl font-medium underline tracking-tight tablet:tracking-wide desktop:tracking-wider text-gray-800">
+          View products </a>
+      </div>
+    </div>
+    <img class="image relative w-full max-w-full" src="images/backgrounds/pillow1.webp" alt="">
+    <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10 absolute z-10 right-0 mr-4 tablet:mr-8 desktop:mr-16 
+      bg-white rounded-full p-1 tablet:p-3 desktop:p-3" id="nextImg" src="images/icons/right-arrow.png" alt="">
+  </div>
+
+
+  <div
+    class="store relative px-10 tablet:px-20 desktop:px-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20">
+    <div class="flex max-w-screen place-content-between pt-4 pb-4 tablet:pb-8 desktop:pb-16">
+      <p class="block text-lg tablet:text-2xl desktop:text-3xl font-semibold"> Store </p>
+      <div class="flex items-center gap-5">
+        <div class="searchBar hidden relative items-center" id="searchBar">
+          <input class="border-2 py-1 px-2 rounded-md border-gray-800" id="searchInput" type="text"
+            placeholder="Search for an item">
+        </div>
+        <i class="fa-solid fa-search fa-xl" id="searchBtn"></i>
+        <i class="sort-asc fa-solid fa-sort-up fa-xl"></i>
+        <i class="sort-desc fa-solid fa-sort-down fa-xl"></i>
+        <i class="fa-solid fa-cart-shopping fa-xl" id="openCart"></i>
+      </div>
+    </div>
+
+    <div class="hidden mt-8 text-xl font-bold text-red-500" id="noResultsMessage"></div>
+
+    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+    </div>
+
+    <div
+      class="hidden absolute top-5 right-5 w-1/2 bg-white border-2 border-solid border-gray-600 rounded-xl shadow-lg mx-10 tablet:mx-20 desktop:mx-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20"
+      id="cart-container">
+      <i class="fa-solid fa-x fa-xl absolute top-7 right-6" id="closeCart"></i>
+    </div>
+
+
+  </div>
+
+  <hr>
+
+
+  <div class="about px-10 tablet:px-20 desktop:px-40 py-5 tablet:py-10 desktop:py-20">
+    <p class="block text-lg tablet:text-xl desktop:text-3xl font-semibold pb-5 tablet:pb-10 desktop:pb-20"> About </p>
+    <p class="text-sm tablet:text-lg desktop:text-xl font-normal">Lorem ipsum dolor sit amet, consectetur adipisicing
+      elit.
+      Cum laudantium incidunt eveniet quisquam id quidem dolorum.
+      Unde molestiae, laborum tenetur vero debitis repellendus earum consectetur eum, quisquam rerum, labore libero?
+      Quibusdam voluptatibus iusto eaque natus tempora laboriosam!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Cum laudantium incidunt eveniet quisquam id quidem dolorum.
+      Quibusdam voluptatibus iusto eaque natus tempora laboriosam!
+    </p>
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  let imageSources = ["images/backgrounds/pillow1.webp",
+    "images/backgrounds/pillow2.webp",
+    "images/backgrounds/pillow3.jpg",
+    "images/backgrounds/pillow4.webp",
+    "images/backgrounds/pillow5.webp"
+  ]
+
+  // Carousel next image function
+  document.querySelector("#nextImg").addEventListener("click", function () {
+    let currentImage = document.querySelector(".image").getAttribute("src");
+    let currentIndex = imageSources.indexOf(currentImage);
+    if (currentIndex < imageSources.length - 1) {
+      document.querySelector(".image").setAttribute("src", imageSources[++currentIndex]);
+    } else {
+      document.querySelector(".image").setAttribute("src", imageSources[0]);
+    }
+  });
+
+  // Carousel previous image function
+  document.querySelector("#previousImg").addEventListener("click", function () {
+    let currentImage = document.querySelector(".image").getAttribute("src");
+    let currentIndex = imageSources.indexOf(currentImage);
+    if (currentIndex > 0) {
+      document.querySelector(".image").setAttribute("src", imageSources[--currentIndex]);
+    } else {
+      document.querySelector(".image").setAttribute("src", imageSources[imageSources.length - 1]);
+    }
+  })
+
+  // Show/Hide search input
+  document.getElementById("searchBtn").addEventListener("click", function () {
+    var searchBar = document.getElementById("searchBar");
+    if (searchBar.classList.contains("hidden")) {
+      searchBar.classList.remove("hidden");
+    } else {
+      searchBar.classList.add("hidden");
+    }
+  });
+
+  // Unhide cart section
+  document.getElementById("openCart").addEventListener("click", function () {
+    var cartContainer = document.getElementById("cart-container");
+    cartContainer.classList.remove("hidden");
+  });
+
+  // Hide cart section
+  document.getElementById("closeCart").addEventListener("click", function () {
+    var cartContainer = document.getElementById("cart-container");
+    cartContainer.classList.add("hidden");
+  });
+
+  let productsData = [
+    {
+      "id": "product_1",
+      "Img": "images/backgrounds/coffee.png",
+      "Name": "Coffee Mug",
+      "Price": 3.99
+    },
+    {
+      "id": "product_2",
+      "Img": "images/backgrounds/candle.png",
+      "Name": "Candles",
+      "Price": 1.49
+    },
+    {
+      "id": "product_3",
+      "Img": "images/backgrounds/dice.png",
+      "Name": "Dice",
+      "Price": 0.99
+    },
+    {
+      "id": "product_4",
+      "Img": "images/backgrounds/lens.png",
+      "Name": "Camera Lens",
+      "Price": 59.99
+    },
+    {
+      "id": "product_5",
+      "Img": "images/backgrounds/pillow.png",
+      "Name": "White Pillow",
+      "Price": 14.99
+    },
+    {
+      "id": "product_6",
+      "Img": "images/backgrounds/lamp.webp",
+      "Name": "Desk Lamp",
+      "Price": 27.49
+    },
+    {
+      "id": "product_7",
+      "Img": "images/backgrounds/table.png",
+      "Name": "Bed Table",
+      "Price": 39.99
+    },
+    {
+      "id": "product_8",
+      "Img": "images/backgrounds/projector.png",
+      "Name": "Projector",
+      "Price": 74.99
+    }
+  ]
+
+  // Create and display product cards
+  function displayProductCards(productsData) {
+    const container = document.querySelector('.product-grid');
+
+    container.innerHTML = '';
+
+    productsData.forEach(product => {
+      const productCardHTML = `
+      <div class="product-card grid-item flex flex-col w-min-1/5 shadow-lg">
+        <img class="product-image w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2" src="${product.Img}" alt="">
+        <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
+          <div class="flex-col">
+            <p class="product-name font-medium text-gray-600">${product.Name}</p>
+            <div class="flex">
+              <p class="font-medium"> $ </p>
+              <p class="product-price font-medium"> ${product.Price}</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <div class="heartfn flex">
+              <i class="fa-regular fa-heart heart-normal fa-xl"></i>
+              <i class="fa-solid fa-heart heart-like hidden fa-xl"></i>
+            </div>
+            <button onclick="addItemToCart('${product.id}')" data-set="${product.id}" class="addCart-btn border-2 border-gray-600 rounded-lg bg-gray-200 hover:bg-blue-400 hover:text-white font-bold py-2 px-1">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+      container.innerHTML += productCardHTML;
+    });
+  }
+
+  displayProductCards(productsData);
+
+  let cartItems = [];
+
+  // Add an item to the cart
+  function addItemToCart(productId) {
+    const existingCartItem = cartItems.find(item => item.productId === productId);
+
+    if (existingCartItem) {
+      existingCartItem.quantity += 1;
+    } else {
+      cartItems.push({ productId, quantity: 1 });
+    }
+
+    updateCartDisplay();
+  }
+
+  // Remove an item from the cart
+  function removeItemFromCart(productId) {
+    const itemIndex = cartItems.findIndex(item => item.productId === productId);
+
+    if (itemIndex !== -1) {
+      cartItems.splice(itemIndex, 1);
+
+      updateCartDisplay();
+    }
+  }
+
+
+
+  // Update the cart display
+  function updateCartDisplay() {
+    const cartContainer = document.getElementById('cart-container');
+
+    cartContainer.innerHTML = '';
+
+    cartItems.forEach(item => {
+      const productDetails = productsData.find(product => product.id === item.productId);
+
+      if (productDetails) {
+        const cartItem = document.createElement('div');
+        cartItem.style.display = 'flex';
+        cartItem.style.alignItems = 'center';
+        cartItem.style.gap = '10px';
+
+        const productImage = document.createElement('img');
+        productImage.src = productDetails.Img;
+        productImage.alt = productDetails.Name;
+        productImage.style.width = '200px';
+
+        cartItem.appendChild(productImage);
+
+        cartItem.innerHTML += ` Product: ${productDetails.Name}, Quantity: ${item.quantity}`;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => removeItemFromCart(item.productId));
+
+        cartItem.appendChild(removeButton);
+
+        cartContainer.appendChild(cartItem);
+      }
+    });
+
+    if (cartItems.length === 0) {
+      cartContainer.classList.add('hidden');
+    }
+
+  }
+
+  displayProductCards(productsData);
+
+  let sortDirection = "asc";
+
+  // Sort products by price
+  function sortItems(sortDirection) {
+    var gridItems = document.querySelectorAll('.product-card');
+    var sortedGridItems = Array.from(gridItems).sort((a, b) => {
+      var priceA = parseFloat(a.querySelector('.product-price').textContent);
+      var priceB = parseFloat(b.querySelector('.product-price').textContent);
+
+      if (sortDirection === 'asc') {
+        return priceA - priceB;
+      } else {
+        return priceB - priceA;
+      }
+    });
+
+    var gridContainer = document.querySelector('.product-grid');
+    sortedGridItems.forEach(item => gridContainer.appendChild(item));
+  }
+
+  var ascSortIcon = document.querySelector('.sort-asc');
+  var descSortIcon = document.querySelector('.sort-desc');
+
+  ascSortIcon.addEventListener('click', function () {
+    console.log("Asc icon click");
+    sortItems('asc');
+  });
+
+  descSortIcon.addEventListener('click', function () {
+    console.log("Desc icon click");
+    sortItems('desc');
+  });
+
+  // Change heart icon style
+  document.querySelectorAll('.heartfn').forEach(heartfn => {
+    heartfn.addEventListener('click', function () {
+      const heartNormal = this.querySelector('.heart-normal');
+      const heartRed = this.querySelector('.heart-like');
+
+      if (heartRed.classList.contains('hidden')) {
+        heartRed.classList.remove('hidden');
+        heartNormal.classList.add('hidden');
+      } else {
+        heartRed.classList.add('hidden');
+        heartNormal.classList.remove('hidden');
+      }
+    });
+  });
+
+  const searchBar = document.getElementById('searchBar');
+  const searchInput = searchBar.querySelector('input');
+  const cards = document.querySelectorAll('.grid-item');
+  const noResultsMessage = document.getElementById('noResultsMessage');
+
+  // Filter searched products
+  searchInput.addEventListener('input', () => {
+    const searchText = searchInput.value.toLowerCase();
+    let hasResults = false;
+
+    cards.forEach(card => {
+      const productName = card.querySelector('.product-name').textContent.toLowerCase();
+      const productPrice = card.querySelector('.product-price').textContent.toLowerCase();
+
+      if (productName.includes(searchText) || productPrice.includes(searchText)) {
+        card.style.display = '';
+        hasResults = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (hasResults) {
+      noResultsMessage.classList.add('hidden');
+    } else {
+      noResultsMessage.classList.remove('hidden');
+      noResultsMessage.textContent = 'No results found for your search.';
+    }
+
+  });
+</script>
